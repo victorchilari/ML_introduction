@@ -1,0 +1,12 @@
+Miss. Mary         9
+Miss. Anna         9
+Miss. Margaret     6
+Miss. Elizabeth    5
+Miss. Ellen        4
+                  ..
+Miss. Eugenie      1
+Miss. Ethel        1
+Miss. Erna         1
+Miss. Ellis        1
+Miss. Wendla       1
+Length: 120, dtype: int64

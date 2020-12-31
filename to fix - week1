@@ -1,0 +1,15 @@
+src.1
+the result is expected like tow numbers // Severity low
+
+src.4
+the result is expected like tow numbers // Severity low
+
+src.5
+the result is expected like a number // Severity low
+
+src.6
+the result is expected like a name // Severity low
+RegEx's filter - need just name // Severity low
+
+// note where i found correct version of the table
+https://github.com/datasciencedojo/datasets/blob/master/titanic.csv
