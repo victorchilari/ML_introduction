@@ -10,7 +10,7 @@ def intoFile(name, content, sec_content=""):
     if sec_content == "":
         text = content
     else:
-        text = (content, sec_content)
+        text = str(content) + " " + str(sec_content)
     f.write(str(text))
     f.close()
 
@@ -23,8 +23,9 @@ def printFile(name):
 data = pandas.read_csv('titanic.csv', index_col='PassengerId')
 
 countSex = data['Sex'].value_counts()
+
 file_name = "Src 1"
-intoFile(file_name, countSex)
+intoFile(file_name, countSex.male, countSex.female)
 printFile(file_name)
 
 total = data['Survived'].count()
@@ -52,18 +53,18 @@ intoFile(file_name, avgAge, median)
 printFile(file_name)
 
 df = pandas.DataFrame(data, columns=['SibSp', 'Parch'])
-corelation = df.corr(method='pearson', min_periods=1).to_string()
+corelation = df.corr(method='pearson', min_periods=1)
 
 file_name = "Src 5"
-intoFile(file_name, corelation)
+intoFile(file_name, corelation['SibSp']['Parch'])
 printFile(file_name)
 
 # data['Sex']='female'
-df_with_female = data[data['Sex'].eq('female')]
+# df_with_female = data[data['Sex'].eq('female')]
 # sex is additional, can delete
-first_name = df_with_female['Name'].str.extract(r'(Miss\.\s\w+)')
-count_name = first_name.value_counts()
-
+dirty_first_name = data['Name'].str.extract(r'(Miss\.\s\w+)')
+count_name = dirty_first_name.value_counts()
+first_name = count_name.index[0][0][6:]
 file_name = "Src 6"
-intoFile(file_name, count_name)
+intoFile(file_name, first_name)
 printFile(file_name)

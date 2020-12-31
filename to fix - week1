@@ -1,15 +1,18 @@
 src.1
-the result is expected like tow numbers // Severity low
+the result is expected like tow numbers // Severity low // Done 31.12
 
 src.4
-the result is expected like tow numbers // Severity low
+the result is expected like tow numbers // Severity low // Done 31.12
 
 src.5
-the result is expected like a number // Severity low
+the result is expected like a number // Severity low // Done 31.12
 
 src.6
-the result is expected like a name // Severity low
-RegEx's filter - need just name // Severity low
+the result is expected like a name // Severity low // Done 31.12
+RegEx's filter - need just name // Severity low // Changed the algorithm
 
 // note where i found correct version of the table
-https://github.com/datasciencedojo/datasets/blob/master/titanic.csv
+github.com/datasciencedojo/datasets/blob/master/titanic.csv
+
+// note where I found fix for the first fix
+github.com/Rom4e6/Machine-Learning-Yandex-intro/blob/master/Machine%20Learning%20Yandex%20intro/Week_1/Week_1_Solutions.ipynb
