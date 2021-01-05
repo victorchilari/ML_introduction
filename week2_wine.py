@@ -2,8 +2,9 @@ import pandas
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
-
-
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import scale
+'''
 WORK_COLUMNS = ['Alcohol', 'MalicAcid', 'Ash', 'AlcalinityOfAsh', 'Magnesium', 'TotalPhenols', 'Flavanoids',
                 'NonflavanoidPhenols', 'Proanthocyanins', 'ColorIntensity', 'Hue', 'OD280_OD315OfDilutedWines',
                 'Proline']
@@ -15,11 +16,26 @@ signs = pandas.DataFrame(data, columns=WORK_COLUMNS)
 
 X = wineClass
 y = signs
+'''
+data = pandas.read_csv('wine.data', header=None)
+X = data.loc[:,1:]
+y = data[0]
 
 kf = KFold(shuffle=True, random_state=42, n_splits=5)
-knn = KNeighborsClassifier()
-knn.fit(X, y)
-# knn.n_neighbors
+
+neighbors_accuracy = {}
+
+for n in range(50):
+    neighbor = KNeighborsClassifier(n_neighbors = n+1)
+    inter_res = cross_val_score(neighbor,X,y, cv = kf, scoring='accuracy')
+    neighbors_accuracy[n+1] = inter_res.mean()
+
+max_accuracy = max(neighbors_accuracy.values())
+max_n = max(neighbors_accuracy, key=neighbors_accuracy.get)
+print(max_n, max_accuracy)
+# knn = KNeighborsClassifier()
+# knn.fit(X, y)
+# knn.n_neighbors      n_neighbors = n+1
 # importances = cross_val_score(estimator=knn, cv = kf, X = wineClass, y = signs, scoring='accuracy')
 # importances = clf.feature_importances_
 # print(importances)
