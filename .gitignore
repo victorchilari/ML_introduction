@@ -2,6 +2,7 @@
 
 /.gitattributes
 /.idea
+Src*.txt
 
 # Environments
 venv/
