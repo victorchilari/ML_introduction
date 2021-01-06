@@ -4,6 +4,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 
+
 def intoFile(name, content, sec_content=""):
     # round float
     content = content if not isinstance(content, float) else round(content, 2)
@@ -22,7 +23,8 @@ def printFile(name):
     f = open(name + ".txt", "r")
     print(name + "\n", f.read())
 
-def classificationAccuracy(X, y, cv, score, azRange=[1,51]):
+
+def accuracyClassification(X, y, cv, score, azRange=[1, 51]):
     neighbors_accuracy = {}
 
     a, z = azRange
@@ -33,36 +35,28 @@ def classificationAccuracy(X, y, cv, score, azRange=[1,51]):
 
     max_n = max(neighbors_accuracy, key=neighbors_accuracy.get)
     max_accuracy = max(neighbors_accuracy.values())
-    return  [max_n,max_accuracy]
+    return [max_n, max_accuracy]
 
 
-#1
+# 1
 data = pandas.read_csv('wine.data', header=None)
-#2
-X = data.loc[:,1:]
+# 2
+X = data.loc[:, 1:]
 y = data[0]
-#3
+# 3
 kf = KFold(shuffle=True, random_state=42, n_splits=5)
-#4
-max_n, max_accuracy = classificationAccuracy(X,y,kf,score='accuracy')
+# 4
+max_n, max_accuracy = accuracyClassification(X, y, kf, score='accuracy')
+
 file_name = "Src 1"
 intoFile(file_name, max_n)
 file_name = "Src 2"
 intoFile(file_name, max_accuracy)
 
-#5
+# 5+6
 X_scaled = sklearn.preprocessing.scale(X)
-'''
-neighbors_accuracy_scaled = {}
-for n in range(1, 51):
-    neighbor = KNeighborsClassifier(n_neighbors = n)
-    importances = cross_val_score(neighbor, X_scaled, y, cv = kf, scoring='accuracy')
-    neighbors_accuracy_scaled[n] = importances.mean()
-#6
-max_n = max(neighbors_accuracy_scaled, key=neighbors_accuracy_scaled.get)
-max_accuracy = max(neighbors_accuracy_scaled.values())
-'''
-max_n, max_accuracy = classificationAccuracy(X= X_scaled, y= y, cv= kf, score= 'accuracy')
+
+max_n, max_accuracy = accuracyClassification(X=X_scaled, y=y, cv=kf, score='accuracy')
 
 file_name = "Src 3"
 intoFile(file_name, max_n)
