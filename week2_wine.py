@@ -1,8 +1,5 @@
 import pandas
 import sklearn
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
-from sklearn.neighbors import KNeighborsClassifier
 
 
 def intoFile(name, content, sec_content=""):
@@ -29,8 +26,8 @@ def accuracyClassification(X, y, cv, score, azRange=[1, 51]):
 
     a, z = azRange
     for n in range(a, z):
-        neighbor = KNeighborsClassifier(n_neighbors=n)
-        importances = cross_val_score(neighbor, X, y, cv=cv, scoring=score)
+        neighbor = sklearn.neighbors.KNeighborsClassifier(n_neighbors=n)
+        importances = sklearn.model_selection.cross_val_score(neighbor, X, y, cv=cv, scoring=score)
         neighbors_accuracy[n] = importances.mean()
 
     max_n = max(neighbors_accuracy, key=neighbors_accuracy.get)
@@ -44,7 +41,7 @@ data = pandas.read_csv('wine.data', header=None)
 X = data.loc[:, 1:]
 y = data[0]
 # 3
-kf = KFold(shuffle=True, random_state=42, n_splits=5)
+kf = sklearn.model_selection.KFold(shuffle=True, random_state=42, n_splits=5)
 # 4
 max_n, max_accuracy = accuracyClassification(X, y, kf, score='accuracy')
 
